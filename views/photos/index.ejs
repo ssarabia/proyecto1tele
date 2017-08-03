@@ -1,5 +1,4 @@
-<% include partials/header %>
-
+<% include ../partials/header %>
 
 <div class="container">
   <header class="jumbotron">
@@ -9,7 +8,22 @@
       <p><a class="btn btn-primary btn-large" href="photos/new">Subir foto</a></p>
     </div>
   </header>
-
+  <div class="container">
+	<div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div>
+                <form class="input-group stylish-input-group" action="/photos/search" method="POST">
+                    <input type="text" class="form-control" name="search"  placeholder="Whatever" >
+                    <span class="input-group-addon">
+                        <button type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </form>
+            </div>
+        </div>
+	</div>
+</div>
   <div class="row text-center" style="display: flex; flex-wrap:wrap">
     <% photos.forEach(function(photo){ %>
       <div class="col-md-3 col-sm-6">
@@ -30,4 +44,4 @@
 
 </div>
 
-<% include partials/footer %>
+<% include ../partials/footer %>
