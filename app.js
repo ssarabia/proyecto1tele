@@ -14,7 +14,7 @@ var commentRoutes =   require("./routes/comments"),
     authRoutes    =   require("./routes/index");
 // seedDB();
 
-
+var port = process.env.PORT || 3000;
 
 mongoose.connect("mongodb://localhost/proyecto", {useMongoClient: true});
 mongoose.Promise = global.Promise;
@@ -47,6 +47,6 @@ app.use("/photos/:id/comments", commentRoutes);
 
 
 
-app.listen(3000, function(){
-  console.log("Proyecto corriendo en el puerto 3000")
+app.listen(port, function(){
+  console.log("Proyecto corriendo en el puerto 3000");
 });
