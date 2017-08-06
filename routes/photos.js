@@ -5,7 +5,6 @@ var Photo = require("../models/photo")
 router.get("/", function(req,res){
   console.log(req.user);
   if(req.user){
-    console.log("ESTOY LOGUEADITO")
     Photo.find({$or: [{"publico" : "true"}, {$and: [{"publico":{$nin: "true"}}, {"author.id":req.user._id}]}]} ,function(err, photos){
       if(err){
         console.log(err);
