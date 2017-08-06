@@ -4,6 +4,7 @@ var photoSchema = new mongoose.Schema({
   name: String,
   source: String,
   description: String,
+  publico: String,
   author: {
     id: {
       type : mongoose.Schema.Types.ObjectId,
