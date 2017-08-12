@@ -1,47 +1,49 @@
 <% include ../partials/header %>
 
-<div class="container">
-  <header class="jumbotron">
-    <div class="container">
-      <h1><i class="fa fa-camera-retro" aria-hidden="true"></i> Bienvenido al blog de fotografia!</h1>
-      <p>Imagenes de diferentes fotografos tomadas alrededor del mundo</p>
-      <p><a class="btn btn-danger btn-large" href="/photos/new">Subir foto</a></p>
-    </div>
-  </header>
   <div class="container">
-	<div class="row">
+    <header class="jumbotron">
+      <div class="container">
+        <h1><i class="fa fa-camera-retro" aria-hidden="true"></i> Bienvenido al blog de fotografia!</h1>
+        <p>Imagenes de diferentes fotografos tomadas alrededor del mundo</p>
+        <p><a class="btn btn-danger btn-large" href="/photos/new">Subir foto</a></p>
+      </div>
+    </header>
+    <div class="container">
+      <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
-            <div>
-                <form class="input-group stylish-input-group" action="/photos/search" method="POST">
-                    <input type="text" class="form-control" name="search"  placeholder="Whatever" >
-                    <span class="input-group-addon">
+          <div>
+            <form class="input-group stylish-input-group" action="/photos/search" method="POST">
+              <input type="text" class="form-control" name="search" placeholder="Whatever">
+              <span class="input-group-addon">
                         <button type="submit">
                             <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
-                </form>
-            </div>
-        </div>
-	</div>
-</div>
-  <div class="row text-center" style="display: flex; flex-wrap:wrap">
-    <% photos.forEach(function(photo){ %>
-      <div class="col-md-6 col-sm-12">
-        <div class="thumbnail">
-          <img src="<%= photo.source %>" alt="">
-          <div class="caption">
-            <h4><%= photo.name %></h4>
+              </button>
+              </span>
+            </form>
           </div>
-          <p>
-            <a href="/photos/<%= photo._id%>" class="btn btn-danger">Mas informacion</a>
-          </p>
         </div>
       </div>
+    </div>
+    <div class="row text-center" style="display: flex; flex-wrap:wrap">
+      <% photos.forEach(function(photo){ %>
+        <div class="col-md-6 col-sm-12">
+          <div class="thumbnail">
+            <img src="<%= photo.source %>" alt="">
+            <div class="caption">
+              <h4>
+                <%= photo.name %>
+              </h4>
+            </div>
+            <p>
+              <a href="/photos/<%= photo._id%>" class="btn btn-danger">Mas informacion</a>
+            </p>
+          </div>
+        </div>
 
-      <% }); %>
+        <% }); %>
+    </div>
+
+
   </div>
 
-
-</div>
-
-<% include ../partials/footer %>
+  <% include ../partials/footer %>
