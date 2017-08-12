@@ -5,7 +5,16 @@ const Player = require('player');
 const Path = require('path');
 const multer = require('multer');
 
-var upload = multer({dest: 'uploads/'});
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.filedname + '-' + Date.now() + '.jpg');
+  }
+})
+
+const upload = multer({storage: storage});
 
 router.get("/", function (req, res) {
   if (req.user) {
