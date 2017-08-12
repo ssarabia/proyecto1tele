@@ -47,5 +47,5 @@ app.use("/photos", photoRoutes);
 app.use("/photos/:id/comments", commentRoutes);
 
 app.listen(port, function () {
-  console.log("Proyecto corriendo en el puerto" + PORT);
+  console.log("Proyecto corriendo en el puerto" + PORT + ":v");
 });
