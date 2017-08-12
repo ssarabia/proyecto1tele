@@ -50,5 +50,5 @@ app.use("/photos/:id/comments", commentRoutes);
 
 
 app.listen(port, function(){
-  console.log("Proyecto corriendo en el puerto 3000");
+  console.log("Proyecto corriendo en el puerto 3000 :v");
 });
