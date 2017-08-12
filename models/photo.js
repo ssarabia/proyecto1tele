@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 var photoSchema = new mongoose.Schema({
   name: String,
@@ -7,7 +7,7 @@ var photoSchema = new mongoose.Schema({
   publico: String,
   author: {
     id: {
-      type : mongoose.Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User"
     },
     username: String

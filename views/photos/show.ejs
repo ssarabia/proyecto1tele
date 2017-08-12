@@ -1,36 +1,44 @@
 <% include ../partials/header %>
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <div class="thumbnail">
-        <img src="<%= photo.source %>" alt="" class="img-responsive">
-        <div class="caption-full">
-          <h4 class="pull-right">Autor: <%= photo.author.username %></h4>
-          <a href="/photos/<%= photo._id %>/edit" class="btn btn-warning">Editar</a>
-          <form id="deleteForm" action="/photos/<%= photo._id %>/?_method=DELETE" method="post">
-            <button class="btn btn-danger">Borrar</button>
-          </form>
-          <h4><%= photo.name %></h4>
-          <p><%= photo.description %></p>
-        </div>
-      </div>
-      <div class="well">
-        <div class="text-right">
-          <a class="btn btn-success" href="/photos/<%= photo._id %>/comments/new">Añadir comentario</a>
-        </div>
-        <hr>
-        <% photo.comments.forEach(function(comment){%>
-          <div class="row">
-            <div class="col-md-12">
-              <strong><%= comment.author.username %></strong>
-              <span class="pull-right">10 days ago</span>
-              <p><%= comment.text %></p>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="thumbnail">
+          <img src="<%= photo.source %>" alt="" class="img-responsive">
+          <div class="caption-full">
+            <h4 class="pull-right">Autor:
+              <%= photo.author.username %>
+            </h4>
+            <a href="/photos/<%= photo._id %>/edit" class="btn btn-warning">Editar</a>
+            <form id="deleteForm" action="/photos/<%= photo._id %>/?_method=DELETE" method="post">
+              <button class="btn btn-danger">Borrar</button>
+            </form>
+            <h4>
+              <%= photo.name %>
+            </h4>
+            <p>
+              <%= photo.description %>
+            </p>
           </div>
+        </div>
+        <div class="well">
+          <div class="text-right">
+            <a class="btn btn-success" href="/photos/<%= photo._id %>/comments/new">Añadir comentario</a>
+          </div>
+          <hr>
+          <% photo.comments.forEach(function(comment){%>
+            <div class="row">
+              <div class="col-md-12">
+                <strong><%= comment.author.username %></strong>
+                <span class="pull-right">10 days ago</span>
+                <p>
+                  <%= comment.text %>
+                </p>
+              </div>
+            </div>
 
-          <% });%>
+            <% });%>
+        </div>
       </div>
     </div>
-  </div>
 
-<% include ../partials/footer %>
+    <% include ../partials/footer %>
