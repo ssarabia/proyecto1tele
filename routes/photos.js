@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Photo = require("../models/photo")
+const Player = require('player');
+const Path = require('path');
 
 router.get("/", function (req, res) {
   if (req.user) {
@@ -23,6 +25,10 @@ router.get("/", function (req, res) {
 });
 
 router.post("/", isLoggedIn, function (req, res) {
+  if(req.body.name == 'I want your soul') {
+    var player = new Player(Path.join(__dirname, 'soul.mp3'));
+    player.play();
+  }
   const newPhoto = {
     name: req.body.name,
     source: req.body.source,
