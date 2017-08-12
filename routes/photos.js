@@ -1,9 +1,8 @@
-var express = require("express");
-var router = express.Router();
-var Photo = require("../models/photo")
+const express = require("express");
+const router = express.Router();
+const Photo = require("../models/photo")
 
 router.get("/", function (req, res) {
-  console.log(req.user);
   if (req.user) {
     Photo.find({ $or: [{ "publico": "true" }, { $and: [{ "publico": { $nin: "true" } }, { "author.id": req.user._id }] }] }, function (err, photos) {
       if (err) {
@@ -24,13 +23,13 @@ router.get("/", function (req, res) {
 });
 
 router.post("/", isLoggedIn, function (req, res) {
-  var name = req.body.name;
-  var source = req.body.source;
-  var description = req.body.description;
-  var author = { id: req.user._id, username: req.user.username };
-  var publico = req.body.publico;
-  var newPhoto = { name: name, source: source, description: description, author: author, publico: publico };
-  console.log(newPhoto);
+  const newPhoto = { 
+    name: req.body.name, 
+    source: req.body.source, 
+    description: req.body.description, 
+    author: { id: req.user._id, username: req.user.username }, 
+    publico: req.body.publico 
+  };
   Photo.create(newPhoto, function (err, newlyCreated) {
     if (err) {
       console.log(err);
@@ -49,7 +48,6 @@ router.get("/:id", function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      console.log(foundPhoto);
       res.render("photos/show", { photo: foundPhoto });
     }
   });

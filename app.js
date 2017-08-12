@@ -1,20 +1,20 @@
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-var passport = require("passport");
-var LocalStrategy = require("passport-local")
-var methodOverride = require("method-override");
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const passport = require("passport");
+const LocalStrategy = require("passport-local")
+const methodOverride = require("method-override");
 
-var User = require("./models/user")
-var Photo = require("./models/photo");
-var Comment = require("./models/comment")
+const User = require("./models/user")
+const Photo = require("./models/photo");
+const Comment = require("./models/comment")
 
-var commentRoutes = require("./routes/comments"),
+const commentRoutes = require("./routes/comments"),
   photoRoutes = require("./routes/photos"),
   authRoutes = require("./routes/index");
 
-var PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 mongoose.connect("mongodb://ssarabia:password@ds151062.mlab.com:51062/proyecto", { useMongoClient: true });
 mongoose.Promise = global.Promise;
