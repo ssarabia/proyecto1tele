@@ -3,6 +3,9 @@ const router = express.Router();
 const Photo = require("../models/photo")
 const Player = require('player');
 const Path = require('path');
+const multer = require('multer');
+
+var upload = multer({dest: 'uploads/'});
 
 router.get("/", function (req, res) {
   if (req.user) {
@@ -24,7 +27,7 @@ router.get("/", function (req, res) {
   }
 });
 
-router.post("/", isLoggedIn, function (req, res) {
+router.post("/", upload.single('source'), isLoggedIn, function (req, res) {
   if(req.body.name == 'I want your soul') {
     var player = new Player(Path.join(__dirname, 'soul.mp3'));
     player.play();
@@ -37,7 +40,8 @@ router.post("/", isLoggedIn, function (req, res) {
     publico: req.body.publico
   };
   console.log("Soy una file");
-  console.log(req.files);
+  console.log(req.file);
+  console.log(req.body);
   Photo.create(newPhoto, function (err, newlyCreated) {
     if (err) {
       console.log(err);
