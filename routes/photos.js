@@ -1,16 +1,17 @@
 const express = require("express");
-const router = express.Router();
-const Photo = require("../models/photo")
-const Player = require('player');
-const Path = require('path');
-const multer = require('multer');
+const Photo   = require("../models/photo")
+const Player  = require('player');
+const path    = require('path');
+const multer  = require('multer');
+const fs      = require('fs');
+const router  = express.Router();
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'uploads/');
   },
   filename: (req, file, cb) => {
-    cb(null, file.filedname + '-' + Date.now() + '.jpg');
+    cb(null, file.originalname);
   }
 })
 
@@ -38,12 +39,12 @@ router.get("/", function (req, res) {
 
 router.post("/", upload.single('source'), isLoggedIn, function (req, res) {
   if(req.body.name == 'I want your soul') {
-    var player = new Player(Path.join(__dirname, 'soul.mp3'));
+    var player = new Player(path.join(__dirname, 'soul.mp3'));
     player.play();
   }
   const newPhoto = {
     name: req.body.name,
-    source: req.body.source,
+    source: req.file.filename,
     description: req.body.description,
     author: { id: req.user._id, username: req.user.username },
     publico: req.body.publico

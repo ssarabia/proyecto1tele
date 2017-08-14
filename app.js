@@ -16,8 +16,9 @@ const commentRoutes = require("./routes/comments"),
 
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect("mongodb://ssarabia:password@ds151062.mlab.com:51062/proyecto", { useMongoClient: true });
+mongoose.connect("mongodb://localhost:27017/proyecto", { useMongoClient: true });
 mongoose.Promise = global.Promise;
+app.use(express.static('uploads'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
