@@ -233,7 +233,24 @@ Existen dos categorías principales para hacer un sistema más eficiente: Contro
 ### 2.4 Diseño de la aplicación
 
 #### 2.4.1 Vistas de arquitectura
-![](http://i.imgur.com/850U3WO.png)  
+![](http://i.imgur.com/850U3WO.png)
+
+#### 2.4.2 Patrones de arquitectura 
+  * Arquitectura orientada a servicios
+  * Modelo vista controlador
+  * Programación por capas
+
+#### 2.4.3 Best practices 
+
+#### 2.4.4 Tácticas 
+  * Balanceo de cargas para rendimiento y disponibilidad.
+  * Redundancia de datos en la base de datos y el file server.
+
+#### 2.4.5 Herramientas 
+  * Jmeter: Se utilizará para medir el tiempo de respuesta de la aplicación con varias situaciones hipotéticas de números de usuarios activos.
+  * Postman: Se utilizará para probar si los request son válidos y las autorizaciones funcionan correctamente.
+  * Sonarqube: Se usará para realizar un análisis de vulnerabilidades y bugs en el código de la aplicación.
+
 
 
 
