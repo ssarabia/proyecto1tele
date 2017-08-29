@@ -233,7 +233,7 @@ Existen dos categorías principales para hacer un sistema más eficiente: Contro
 ### 2.4 Diseño de la aplicación
 
 #### 2.4.1 Vistas de arquitectura
-![](http://imgur.com/a/zWbv9)  
+![](http://i.imgur.com/850U3WO.png)  
 
 
 
