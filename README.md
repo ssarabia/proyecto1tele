@@ -68,8 +68,16 @@ La disponibilidad es un factor crítico de calidad, el cual no puede ser obviado
   
 
 #### 2.1.3 Especificación mediante escenarios
- * 
-
+ * Source of stimulus: El lugar de donde viene el estímulo, si es interno o externo, y dependiendo de la fuente la respuesta puede ser diferente.
+ * Stimulus: Puede ser de los siguientes diferentes tipos:
+    * Omission: El sistema falla al responder a un estímulo.
+    * Crash: El componente repetidamente tiene fallas de omisión.
+    * Timing: El componente responde a destiempo, o muy temprano o muy tarde.
+    * Response: El componente responde con un valor incorrecto.
+ * Artifact: Este es el recurso que se necesita que tenga alta disponibilidad. 
+ * Environment: El estado del sistema cuando la falla ocurre, ya que este también puede afectar la respuesta. 
+ * Response: Diferentes tipos de respuestas, primero se debe detectar y aislar el error antes de dar una respuesta. Una vez es detectada, el sistema debe recuperarse de esta.
+ * Response measure: Especifica el cambio % en la disponibilidad debido a la respuesta brindada por la falla.
 
 #### 2.1.4 ¿Qué tácticas se pueden emplear?
  * **Fault prediction:** Predecir fallas potenciales, las cuales se detectan adoptando modelos que usan técnicas de probabilidad, y los cuales se soportan en datos históricos de otros proyectos.
@@ -155,6 +163,77 @@ Los diferentes escenarios de seguridad se pueden describir por medio de las dife
   * Informar actores: Los ataques pueden requerir acciones de los operadores, por lo que estos deben ser notificados cuando el sistema se encuentre en peligro.
   #### **Recuperarse ataques:**
   * Una vez que el sistema ha detectado y tratado de resistir un ataque, necesita recuperarse. Parte de esta recuperación es la restauración de servicios. Por ejemplo, servidores o conexiones de red adicionales deben ser mantenidos para tal propósito.
+
+#### 2.2.5 ¿Qué herramientas se pueden utilziar para lograrlo? 
+  * **Herramientas Comerciales:**
+    * Acunetix WVS
+    * AppScan
+    * Burp Suite Professional
+    * Hailstorm
+    * N-Stalker
+  * **Proveedores de Software-as-a-Service:**
+    * AppScan OnDemand by IBM
+    * ClickToSecure by Cenzic
+    * QualysGuard Web Application Scanning by Qualys
+    * Sentinel by WhiteHat
+    * Veracode Web Application Security by Veracode
+  * **Herramientas open source:**
+    * Arachni by Tasos Laskos
+    * Grabber by Romain Gaucher
+    * Grendel-Scan by David Byrne and Eric Duprey
+    * Paros by Chinotec
+      * Andiparos
+      * Zed Attack Proxy
+    * Powerfuzzer by Marcin Kozlowski
+    * SecurityQA Toolbar by iSEC Partners
+    * Skipfish by Michal Zalewski
+    * W3AF by Andres Riancho
+
+### 2.3 Disponibilidad
+
+#### 2.3.1 ¿Qué es?
+Se define como el tiempo de respuesta que tiene un sistema(o un componente específico del sistema) dado un evento específico. Normalmente las páginas web rápidas y responsive brindan una experiencia de usuario mejor y tienden a presentar mayores probabilidades de éxito como productos. 
+Con la proliferación de múltiples plataformas y dispositivos y siendo la web un sistema unificado, su velocidad es más importante que nunca. En general la optimización de rendimiento en la web se centra en que los componentes se ejecuten más rápido y se carguen de la manera más óptima en cualquier dispositivo que el usuario use.  Igualmente, el hardware juega un rol importante en la optimización y el rendimiento de una aplicación. 
+
+#### 2.3.2 ¿Qué patrones se pueden emplear?
+* Cache-Aside: Cargar los datos que tienen mucha demanda en una memoria caché para no ir hasta los servidores de datos. 
+* CQRS: Segregar operaciones de leer datos de las operaciones de actualizar datos usando interfaces separadas. 
+* Index Table: Se recomienda crear punteros o referencias a los datos que son frecuentemente referenciados en colas.
+* Priority Queue: Priorizar los request que tienen más importancia ayuda a que las operaciones más críticas se realicen antes que las que tienen menos importantes. 
+* Static Content Hosting: Desplegar contenido estático permite mandar contenido directamente al cliente.  
+
+#### 2.3.3 Especificación mediante escenarios
+* Latencia: Es tiempo que existe entre la llegada del estímulo y la respuesta del sistema a este. 
+* Tiempo límite de procesamiento: Significa que los procesos se deben de ejecutar antes de su tiempo máximo límite para optimizar la pipeline, por ejemplo, no se puede operar una variable antes de procesar 100% su valor.
+* Capacidad de carga: Usualmente dado como el número de transacciones que puede ejecutar un sistema en una unidad de tiempo. 
+* Jitter: Entendido como la variación permitida en la latencia.
+* El número de eventos que no procesó el sistema porque estaba demasiado ocupado para responder. 
+
+#### 2.3.4 ¿Qué tácticas se pueden emplear?
+Existen dos categorías principales para hacer un sistema más eficiente: Control en la demanda de recursos y manejo de recursos.
+
+* **Control en la demanda de recursos:**
+  * Manejo de la taza de discretización: Consiste en disminuir la tasa en la que se comprimen los archivos para ocupar menos espacio sacrificando fidelidad de los datos.
+  * Límite de respuesta de eventos: Normalmente se hace una restricción para la cantidad máxima de eventos que puede recibir un sistema.
+  * Priorizar eventos: Si existen eventos dentro del sistema que tienen más importancia que otros, se pueden asignar órdenes para que se ejecuten más con mayor rapidez. 
+  * Reducir sobrecarga: Puede que existan eventos dentro del sistema que puedan ser delegados para otros componentes bajando el sobrestres del sistema aumentando la latencia, lo cual podría ser considerado un tradeoff. 
+  * Limitar tiempos de ejecución: Para optimizar la cola de procesos en un sistema se puede poner un tiempo límite en el cual un proceso tenga que correr, si toma más tiempo del impuesto, se acaba. 
+  * Incrementar la eficiencia de los recursos: Incrementar la eficiencia de los algoritmos usados en las zonas críticas de la aplicación puede ayudar a reducir la latencia.
+* **Manejo de recursos:**
+  * Aumentar los recursos: Procesadores más rápidos, más número de procesadores, memoria adicional e incrementar la velocidad de las redes, todas estas cosas ayudan a reducir la latencia.
+  * Introducir la concurrencia: Si existen procesos que se pueden hacer en paralelo, se pueden añadir más threads para hacer más eficiente los tiempos de respuesta de varios eventos juntos. 
+  * Dividir las computaciones: Mantener todas las computaciones en un mismo servidor puede ocasionar que se colapse cuando muchos request intentan hacer computaciones al mismo tiempo, por eso se recomienda dividir las computaciones en distintos servidores. 
+  * Mantener copias de datos: Usar la técnica de caché para reducir los tiempos en los que va hasta la base de datos por la información, así, un dato muy apetecido no se tiene que cargar n veces desde la base de datos sino que se guarda en un almacenamiento intermedio.  
+
+#### 2.3.5 ¿Qué tácticas se pueden emplear?
+* JMeter
+* Pingdom 
+
+
+
+
+
+
 
 
 
