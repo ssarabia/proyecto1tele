@@ -1,6 +1,5 @@
 const express = require("express");
 const Photo   = require("../models/photo")
-const Player  = require('player');
 const path    = require('path');
 const multer  = require('multer');
 const fs      = require('fs');
@@ -38,10 +37,6 @@ router.get("/", function (req, res) {
 });
 
 router.post("/", upload.single('source'), isLoggedIn, function (req, res) {
-  if(req.body.name == 'I want your soul') {
-    var player = new Player(path.join(__dirname, 'soul.mp3'));
-    player.play();
-  }
   const newPhoto = {
     name: req.body.name,
     source: req.file.filename,
