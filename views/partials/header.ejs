@@ -21,10 +21,13 @@
           <% if(!currentUser){ %>
             <li><a href="/login">Login</a></li>
             <li><a href="/register">Sign up</a></li>
-            <%} else { %>
+            <%} else if(!currentUser.google.id) { %>
               <li><a>Hola! <%= currentUser.username %></a></li>
               <li><a href="/logout">Logout</a></li>
-              <% } %>
+            <% } else {  %>
+              <li><a>Hola! <%= currentUser.google.username %></a></li>
+              <li><a href="/logout">Logout</a></li>
+            <% }  %>
         </ul>
       </div>
     </div>
