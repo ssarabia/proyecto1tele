@@ -7,7 +7,7 @@ const router  = express.Router();
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, '/mnt/glusterfs/public/uploads/');
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
@@ -62,6 +62,7 @@ router.get("/:id", function (req, res) {
     if (err) {
       console.log(err);
     } else {
+      console.log(foundPhoto.filename);
       res.render("photos/show", { photo: foundPhoto });
     }
   });
@@ -77,7 +78,7 @@ router.post("/search", function (req, res) {
   })
 })
 
-router.get("/:id/edit", function (req, res) {
+router.get("/:id/edit", isLoggedIn, function (req, res) {
   Photo.findById(req.params.id, function (err, photo) {
     if (err) {
       res.redirect("/photos")
@@ -97,7 +98,7 @@ router.put("/:id", function (req, res) {
   });
 });
 
-router.delete("/:id", function (req, res) {
+router.delete("/:id", isLoggedIn, function (req, res) {
   Photo.findByIdAndRemove(req.params.id, function (err) {
     res.redirect("/photos");
   });
