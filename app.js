@@ -16,14 +16,13 @@ const commentRoutes = require("./routes/comments"),
 
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect("mongodb://localhost:27017/proyecto", { useMongoClient: true });
+mongoose.connect("mongodb://mongo1:27017,mongo2:27017,mongo3:27017/proyecto?replicaSet=replica1");
 mongoose.Promise = global.Promise;
-app.use(express.static('uploads'));
+//app.use(express.static('uploads'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
-
-app.use(express.static(__dirname + "/public"));
+app.use(express.static("/mnt/glusterfs/public/uploads"));
 app.use(methodOverride("_method"));
 
 app.use(require("express-session")({
