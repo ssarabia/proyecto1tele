@@ -44,9 +44,6 @@ router.post("/", upload.single('source'), isLoggedIn, function (req, res) {
     author: { id: req.user._id, username: req.user.username },
     publico: req.body.publico
   };
-  console.log("Soy una file");
-  console.log(req.file);
-  console.log(req.body);
   Photo.create(newPhoto, function (err, newlyCreated) {
     if (err) {
       console.log(err);
