@@ -252,6 +252,70 @@ Existen dos categorías principales para hacer un sistema más eficiente: Contro
   * Sonarqube: Se usará para realizar un análisis de vulnerabilidades y bugs en el código de la aplicación.
 
 
+## 3. Documento 3
+
+### 3.1 Miembros del equipo
+  * David Medina Ospina
+  * Samuel Eduardo Sarabia Osorio
+  * Daniel Alejandro Martínez Montealegre
+
+### 3.2 Diseño de arquitectura de la Aplicación
+  * Vista de desarrollo
+    * Definicion de Tecnología de Desarrollo
+      * Sistema Operativo: Linux Centos(7)       
+      * Lenguaje de programación	Javascript/NodeJS(6.11.1)
+      * Framework BackEnd: Express(4.15.3)
+      * Framework FrontEnd: Template HTML
+      * Web App Server: Embebido(NodeJS(6.11.1))
+      * Web Server: NGINX(1.12.1)
+      * Base de datos: MongoDB(3.2.11)
+      * Editor: VS Code y VIM
+      * Git: Git Bash(2.11.0)
+      * Pruebas Postman(5.1.2)
+    * [Repositorio](https://github.com/ssarabia/proyecto1tele)
+
+  * Vista de despliegue
+      * Modelo: ![](http://i.imgur.com/dne6hpR.png)   
+      * Definición de Tecnología
+        * Proxy Server Load Balancer: Haproxy
+        * Web Server Reverse Proxy: NGINX
+        * Sistema de Archivos Distribuidos: GlusterFS
+        * Base de Datos: MongoDB Replica Set
+        * Pruebas: Jmeter
+      * Urls de ejecución
+        * [URL IP privada(requiere VPN)](http://10.131.137.175/)
+        * [URL DNS Pública](http://proyecto15.dis.eafit.edu.co/)
+
+### 3.3 Implementación y pruebas por Atributo de Calidad
+  * **Disponibilidad** 
+    * HAProxy fue utilizado para hacer un balanceo de cargas entre los 2 servidores de aplicación. Tuvo que ser configurado para apuntar a dichos servidores, el algoritmo usado para el balanceo y otras configuraciones de la conexión.
+    * GlusterFS fue utilizado para la consistencia de datos dentro de nuestro sistema y el particionamiento, guardando los archivos aleatoriamente en alguna de las dos máquinas y sincronizando eventualmente los datos.
+
+  * **Rendimiento**
+    * HAProxy, al proveer el balanceador de cargas, aumenta la cantidad de máquinas que pueden atender peticiones, lo que nos permite mantener un tiempo de respuesta constante a través de los diferentes niveles de carga de la aplicación. 
+    * JMeter fue utilizado para conocer y asegurar los tiempos de respuesta de la aplicación, además de la capacidad de carga que poseemos con la arquitectura y máquinas que poseemos actualmente. 
+    * NGINX Cache fue utilizado para guardar en caché las imágenes más solicitadas, y así poder enviarlas de vuelta al usuario mucho más rápido.
+    * **Pruebas Jmeter**
+      * Grafico 500 Users Maquina 167![](http://i.imgur.com/raJGHpZ.png) 
+      * Tabla 500 Users Maquina 167![](http://i.imgur.com/27BP6UL.png)
+      * Grafico 500 Users Maquina 221![](http://i.imgur.com/ukH59Ps.png)
+      * Tabla 500 Users Maquina 221![](http://i.imgur.com/vxoShOm.png)
+      * Grafico 1000 Users Load Balancer 175![](http://i.imgur.com/d245n93.png)
+      * Grafico 500 Files Maquina 167![](http://i.imgur.com/T9EeTwG.png)
+      * Tabla 500 Files Maquina 167![](http://i.imgur.com/gbk285J.png)
+      * Grafico 500 Files Maquina 221![](http://i.imgur.com/7rwea88.png)
+      * Tabla 500 Files Maquina 221![](http://i.imgur.com/pRrGUvP.png)
+  
+  * **Seguridad**
+    * Let’s Encrypt nos brinda el certificado necesario para hacer que nuestras conexiones sean realizadas utilizando el protocolo HTTPS para mayor seguridad.
+    * SSO (Google), Registra usuarios en la base de datos y loguea cuentas ya existentes en el sistema, sin tener que ingresar ningún tipo de password o contraseña, usando solamente la API de google.
+    * Se usa PassportJS para brindar autorización sólo a usuarios registrados de subir, editar o eliminar imágenes y también publicar comentarios en las mismas.
+
+   
+     
+
+
+
 
 
 
