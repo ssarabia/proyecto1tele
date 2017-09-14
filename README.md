@@ -189,7 +189,7 @@ Los diferentes escenarios de seguridad se pueden describir por medio de las dife
     * Skipfish by Michal Zalewski
     * W3AF by Andres Riancho
 
-### 2.3 Disponibilidad
+### 2.3 Rendimiento
 
 #### 2.3.1 ¿Qué es?
 Se define como el tiempo de respuesta que tiene un sistema(o un componente específico del sistema) dado un evento específico. Normalmente las páginas web rápidas y responsive brindan una experiencia de usuario mejor y tienden a presentar mayores probabilidades de éxito como productos. 
