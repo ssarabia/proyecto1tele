@@ -21,7 +21,7 @@
 
 ### 1.3 Aplicación completa desplegada en el Data Center Académico 
 
-[Data Center Academico](10.131.137.221)
+[Data Center Academico](http://10.131.137.175)
 
 
 ## 2. Documento 2
